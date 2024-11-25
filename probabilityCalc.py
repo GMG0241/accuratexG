@@ -1,6 +1,10 @@
 #Code written by Gabriel Gullidge
-from itertools import 
+
+from math import comb, prod
+from itertools import combinations
+
 MAX_TEAMS = 2
+
 def loadFile():
     fileName = None
     data = {i:[] for i in range(MAX_TEAMS)}
@@ -34,7 +38,7 @@ def loadInput():
                 if entry is not None:
                     print("Please select a number which is between 0 and 1 inclusive")
                 try:
-                    entry = float(input("Please enter xG entry %d\n" %(j+1)))
+                    entry = float(input("Please enter xG entry %d for team %d\n" %(j+1,i+1)))
                 except Exception as e:
                     print("Please select a number which is between 0 and 1 inclusive")
             data.append(entry)
@@ -45,7 +49,13 @@ def generateTable(teamData):
     SIZE = len(teamData)
     tablePDF = {}
     for x in range(SIZE,-1,-1):
-        aPerm = 
+        perms = combinations(teamData,x)
+        calc = sum([prod(y) for y in perms]) #to be improved using matricies
+        for i in range(x,SIZE):
+            coef = comb(i+1,x)
+            calc -= coef*tablePDF[i+1]
+        tablePDF[x] = calc
+    return tablePDF
 
 
 print("Welcome to a better way to use xG")
@@ -62,5 +72,11 @@ if userResponse == 1:
 else:
     data = loadInput()
 
+print("starting team 0")
+tblTeam0 = generateTable(data[0])
+print("Finished team 0")
+print("starting team 1")
+tblTeam1 = generateTable(data[1])
+print("finished team 1")
 
-    
+
