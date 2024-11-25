@@ -17,5 +17,6 @@ If you plan on manually entering the data, the prompts should be fairly self exp
 2. xG doesn't take into account own goals or potential for own goals. If you want to change the model behind generating probabilities (e.g. xGoT, or something completely different) that is fine, as the maths will work so long as they are genuine probabilities i.e. between 0 and 1 (the model can even be garbage! For example, 1 for on target shots and 0 for off target, and the maths will still work, just don't expect any useful results!). 
 
 # Further
-To see where to collect data of your own, I would recommend the Opta website: https://theanalyst.com/competition/premier-league/fixtures 
-You can select a fixture, and see stats, including an xG map
+To see where to collect data of your own, I would recommend the Opta website: https://theanalyst.com/competition/premier-league/fixtures where you can select a fixture, and see stats, including an xG map. 
+
+Feel free to use this tool for non-commercial use
