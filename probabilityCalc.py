@@ -78,5 +78,25 @@ print("Finished team 0")
 print("starting team 1")
 tblTeam1 = generateTable(data[1])
 print("finished team 1")
+results = {}
+for result0 in tblTeam0: #yes, I know I could have done this better
+    for result1 in tblTeam1:
+        results[str(result0)+"-"+str(result1)] = tblTeam0[result0]*tblTeam1[result1]
 
-
+print(results)
+sortedResults = sorted(results,reverse=True,key=lambda x: results[x])
+print(sortedResults)
+print("sanity check:",sum([results[x] for x in results])) #sanity check should equal 1
+mostLikelyResults = list(sortedResults)[:5]
+print("5 most likely results:",mostLikelyResults,"with probabilities:",[results[x] for x in mostLikelyResults])
+team0WinProb, drawProb, team0LoseProb = 0,0,0
+for result in results:
+    team0, team1 = result.split("-")
+    if int(team0) - int(team1) < 0:
+        team0LoseProb += results[result]
+    elif int(team0) - int(team1) == 0:
+        drawProb += results[result]
+    else:
+        team0WinProb += results[result]
+print("Result Outcome Probability (as a percentage), according to xG:")
+print("Team 0 Win: %f\nDraw: %f\nTeam 0 Loss: %f" %(team0WinProb*100,drawProb*100,team0LoseProb*100))
