@@ -83,8 +83,8 @@ for result0 in tblTeam0: #yes, I know I could have done this better
     for result1 in tblTeam1:
         results[str(result0)+"-"+str(result1)] = tblTeam0[result0]*tblTeam1[result1]
 
-print(results)
 sortedResults = sorted(results,reverse=True,key=lambda x: results[x])
+sortedResults = {sortedResult: results[sortedResult] for sortedResult in sortedResults}
 print(sortedResults)
 print("sanity check:",sum([results[x] for x in results])) #sanity check should equal 1
 mostLikelyResults = list(sortedResults)[:5]
