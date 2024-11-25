@@ -11,6 +11,16 @@ If you plan on using a file, please see the exampleFileinput.txt file, or the SO
 
 If you plan on manually entering the data, the prompts should be fairly self explantiory, but you should input how many entries you plan to make with team 0, and then input the xG values for each shot. If you've entered too many just enter 0 to skip. Do the same for team 1.
 
+# scrapeOptaXGData.js
+
+scrapeOptaXGData.js provides an easy way to collect the xG data from Opta's website (see 'Further'). You need to navigate to a fixture and click on xG map and then follow the instructions below. The javascript file provided should create an output which enables you to collect all of the data in the expected file format. It can be a bit finicky, but after navigating to the xG map: 
+1. inspect the page (Right click and inspect, or Ctrl+Shift+I)
+2. VERY IMPORTANT - Ctrl+Shift+C and click on any of the xG 'Bubbles' you can see 
+3. Click on 'Console' - it is a tab within the inspect pane which you've opened (this can be either at the top of the page, bottom of the page, or both)
+4. Paste the contents of the .js file into the console (you may need to type 'allow pasting' before it allows you to do this)
+5. copy and paste the output into a .txt file on your computer.
+6. Save the file and use it in the program
+
 # Caveats
 1. Currently, part of the probability calculation is inefficient as it takes a lot of memory. I was planning to make this a matrix calculation, but I found it difficult so went with the inefficient method for now. Maybe I'll come back to this and turn it into a matrix calculation, but I expect that for most games this will be fine. The SOU-LIV game has 27 shots from Liverpool and the algorithm takes about 30s to run on my Computer. 27 tends to be near the high side of shots in a game, so we'll see.
 
