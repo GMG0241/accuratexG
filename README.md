@@ -15,3 +15,7 @@ If you plan on manually entering the data, the prompts should be fairly self exp
 1. Currently, part of the probability calculation is inefficient as it takes a lot of memory. I was planning to make this a matrix calculation, but I found it difficult so gave up. Maybe I'll come back to this and turn it into a matrix calculation, but I expect that for most games this will be fine. The SOU-LIV game has 27 shots from Liverpool and the algorithm takes about 30s to run on my Computer. 27 tends to be near the high side of shots in a game, so we'll see.
 
 2. xG doesn't take into account own goals or potential for own goals. If you want to change the model behind generating probabilities (e.g. xGoT, or something completely different) that is fine, as the maths will work so long as they are genuine probabilities i.e. between 0 and 1 (the model can even be garbage! For example, 1 for on target shots and 0 for off target, and the maths will still work, just don't expect any useful results!). 
+
+# Further
+To see where to collect data of your own, I would recommend the Opta website: https://theanalyst.com/competition/premier-league/fixtures 
+You can select a fixture, and see stats, including an xG map
