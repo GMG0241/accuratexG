@@ -1,7 +1,7 @@
-1,0.5
-1,1
-1,0
-1,0.5
-1,0.25
-1,0.1
-0,0.1
+1,0.5,Miss,1:03,Header
+1,1,Goal,1:06,Header
+1,0,Miss,2:00,Left Footed
+1,0.5,Miss,3:00.Right Footed
+1,0.25,Goal,45+5:00,Other body part
+1,0.1,Miss,89:89,Header
+0,0.1,Miss,51:45,Right Footed

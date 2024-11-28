@@ -13,7 +13,7 @@ def loadFile():
         try:
             with open(fileName,"r") as f:
                 for line in f.readlines():
-                    team,value = line.split(",")
+                    team,value = line.split(",")[:2] # solution currently doesn't use extra data provided by the file
                     data[int(team)].append(float(value))
         except Exception as e:
             print("Cannot find file provided, or file is not structured correctly")
