@@ -15,7 +15,7 @@ for (let i = 0; i< xGDataPoints.length; i++){
         extraData += extraDataObject[j].innerHTML+",";
     }
     extraData = extraData.slice(0,extraData.length-1);
-
+    extraData = extraData.replace(/[\u200E]/g, "");
     xGValues += teamName+","+xGDataPoints[i].getAttribute("data-value")+","+extraData+"\n";
 }
 console.log(xGValues);
