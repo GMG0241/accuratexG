@@ -2,6 +2,7 @@
 
 from math import comb, prod
 from itertools import combinations
+from numpy import poly
 
 MAX_TEAMS = 2
 TOP_N_RESULTS = 5
@@ -52,9 +53,12 @@ def loadInput():
 def generateTable(teamData):
     SIZE = len(teamData)
     tablePDF = {}
+
+    #generate polymonial coefficients, and then calculate the sum of roots
+    polyCoeffs = poly(teamData)
+    calcs = [polyCoeffs[i]/polyCoeffs[0]*(-1)**i for i in range(len(polyCoeffs))] #the 'ith' value represents the sum of the unique combinations of size i
     for x in range(SIZE,-1,-1):
-        perms = combinations(teamData,x)
-        calc = sum([prod(y) for y in perms]) #to be improved using matricies
+        calc = calcs[x]
         for i in range(x,SIZE):
             coef = comb(i+1,x)
             calc -= coef*tablePDF[i+1]
@@ -76,12 +80,8 @@ if userResponse == 1:
 else:
     data = loadInput()
 
-print("starting team 0")
 tblTeam0 = generateTable(data[0])
-print("Finished team 0")
-print("starting team 1")
 tblTeam1 = generateTable(data[1])
-print("finished team 1")
 team0Name, team1Name,actualScoreline = input("Enter the name of team 0:\n"),input("Enter the name of team 1:\n"),[int(x) for x in input("Please enter the result of the match in the format NUM-NUM:\n").split("-")]
 results = {}
 for result0 in tblTeam0: #yes, I know I could have done this better
