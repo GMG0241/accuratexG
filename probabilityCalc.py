@@ -4,6 +4,10 @@ from math import comb, prod
 from itertools import combinations
 
 MAX_TEAMS = 2
+TOP_N_RESULTS = 5
+
+def ordinal(n): #code from https://stackoverflow.com/questions/3644417/python-format-datetime-with-st-nd-rd-th-english-ordinal-suffix-like because I'm lazy :/
+    return str(n)+("th" if 4<=n%100<=20 else {1:"st",2:"nd",3:"rd"}.get(n%10, "th"))
 
 def loadFile():
     fileName = None
@@ -78,6 +82,7 @@ print("Finished team 0")
 print("starting team 1")
 tblTeam1 = generateTable(data[1])
 print("finished team 1")
+team0Name, team1Name,actualScoreline = input("Enter the name of team 0:\n"),input("Enter the name of team 1:\n"),[int(x) for x in input("Please enter the result of the match in the format NUM-NUM:\n").split("-")]
 results = {}
 for result0 in tblTeam0: #yes, I know I could have done this better
     for result1 in tblTeam1:
@@ -87,7 +92,7 @@ sortedResults = sorted(results,reverse=True,key=lambda x: results[x])
 sortedResults = {sortedResult: results[sortedResult] for sortedResult in sortedResults}
 print(sortedResults)
 print("sanity check:",sum([results[x] for x in results])) #sanity check should equal 1
-mostLikelyResults = list(sortedResults)[:5]
+mostLikelyResults = list(sortedResults)[:TOP_N_RESULTS]
 print("5 most likely results:",mostLikelyResults,"with probabilities:",[results[x] for x in mostLikelyResults])
 team0WinProb, drawProb, team0LoseProb = 0,0,0
 for result in results:
@@ -100,3 +105,16 @@ for result in results:
         team0WinProb += results[result]
 print("Result Outcome Probability (as a percentage), according to xG:")
 print("Team 0 Win: %f\nDraw: %f\nTeam 0 Loss: %f" %(team0WinProb*100,drawProb*100,team0LoseProb*100))
+
+msg = '''%s %d - %d %s
+Total xG: %.2f - %.2f
+Top %d most likely results:
+''' % (team0Name,actualScoreline[0],actualScoreline[1],team1Name,sum(data[0]),sum(data[1]),TOP_N_RESULTS)
+for resultNum in range(1,TOP_N_RESULTS+1):
+    msg += "%d. %s (%.2f%%)\n" %(resultNum,mostLikelyResults[resultNum-1],round(results[mostLikelyResults[resultNum-1]]*100,3))
+msg += """Match Probability:
+%s Win: %.2f%%, Draw: %.2f%%, %s Win: %.2f%%""" %(team0Name,round(team0WinProb*100,3),round(drawProb*100,3),team1Name,round(team0LoseProb*100,3))    
+stringActualScoreline = str(actualScoreline[0])+"-"+str(actualScoreline[1])
+if stringActualScoreline not in mostLikelyResults:
+    msg += "\nThe result %s was the %s most likely result (%.2f%%)" %(stringActualScoreline,ordinal(list(sortedResults).index(stringActualScoreline)+1),round(results[stringActualScoreline]*100,3))
+print(msg)
