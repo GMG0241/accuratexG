@@ -1,7 +1,6 @@
 #Code written by Gabriel Gullidge
 
-from math import comb, prod
-from itertools import combinations
+from math import comb
 from numpy import poly
 
 MAX_TEAMS = 2
