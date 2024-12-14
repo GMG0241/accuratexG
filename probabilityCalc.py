@@ -105,6 +105,8 @@ for result in results:
 print("Result Outcome Probability (as a percentage), according to xG:")
 print("Team 0 Win: %f\nDraw: %f\nTeam 0 Loss: %f" %(team0WinProb*100,drawProb*100,team0LoseProb*100))
 
+
+#summary of stats
 msg = '''%s %d - %d %s
 Total xG: %.2f - %.2f
 Top %d most likely results:
